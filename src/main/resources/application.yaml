@@ -1,0 +1,11 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    password: jon0311
+    url: jdbc:postgresql://localhost:5432/Liquibase
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true

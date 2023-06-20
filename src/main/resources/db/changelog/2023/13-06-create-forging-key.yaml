@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: createForgingKey
+      author: Georgi Tsandekov
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: comments
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_comments_user
+        - addForeignKeyConstraint:
+            baseTableName: comments
+            baseColumnNames: content_id
+            referencedTableName: contents
+            referencedColumnNames: id
+            constraintName: fk_comments_content
+        - addForeignKeyConstraint:
+            baseTableName: contents
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_contents_user
+        - createTable:
+            tableName: genres_contents
+            columns:
+              - column:
+                  name: genre_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseTableName: genres_contents
+                  baseColumnNames: genre_id
+                  referencedTableName: genres
+                  referencedColumnNames: id
+                  constraintName: fk_genres_contents_genre
+              - addForeignKeyConstraint:
+                  baseTableName: genres_contents
+                  baseColumnNames: content_id
+                  referencedTableName: contents
+                  referencedColumnNames: id
+                  constraintName: fk_genres_contents_content
